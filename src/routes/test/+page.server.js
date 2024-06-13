@@ -18,7 +18,6 @@ export const actions = {
         try {
             const data = await request.formData();
             const institution = Object.fromEntries(data.entries());
-            console.log(institution);
             
             const res = await fetch(`${baseUrl}/institutions`, {
                 method: 'POST',
@@ -27,17 +26,10 @@ export const actions = {
                 },
                 body: JSON.stringify(institution),
             });
-            console.log(res);
-            
-            if (!res.ok) {
-                throw new Error(`HTTP error! status: ${res.status}`);
-            }
+            console.log(res.status);
+
         } catch (error) {
             console.error('Error posting institution:', error);
-            return {
-                status: 500,
-                body: { error: 'Failed to post institution' }
-            };
         }
     }
 };
