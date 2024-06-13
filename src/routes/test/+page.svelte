@@ -1,25 +1,38 @@
 <script>
     /* A table showing all the records with the option to add a new record */
-    
+
     export let data;
+    export let form;
     const institutions = data.institutions.data;
+
+    let showForm = false;
 </script>
 
 <h1>Test</h1>
 
+<!-- A button to show or hide the form -->
+<button on:click={() => (showForm = !showForm)}>Add New Institution</button>
+
+<!-- If the form submit is a success, hide the form -->
+{#if form?.success}
+    {showForm = false}
+{/if}
+
 <!-- A form to accept institution name, region and country -->
-<form method="POST">
-    <label for="name">Institution Name: </label>
-    <input type="text" id="name" name="name" required>
+{#if showForm}
+    <form method="POST">
+        <label for="name">Institution Name: </label>
+        <input type="text" id="name" name="name" required />
 
-    <label for="region">Region: </label>
-    <input type="text" id="region" name="region" required>
+        <label for="region">Region: </label>
+        <input type="text" id="region" name="region" required />
 
-    <label for="country">Country: </label>
-    <input type="text" id="country" name="country" required>
+        <label for="country">Country: </label>
+        <input type="text" id="country" name="country" required />
 
-    <button type="submit">Submit</button>
-</form>
+        <button type="submit">Submit</button>
+    </form>
+{/if}
 
 <!-- A table to display the data -->
 <table>
@@ -31,7 +44,7 @@
         </tr>
     </thead>
     <tbody>
-        {#each institutions as {name, region, country}}
+        {#each institutions as { name, region, country }}
             <tr>
                 <td>{name}</td>
                 <td>{region}</td>
@@ -57,7 +70,27 @@
         border-collapse: collapse;
     }
 
-    th, td {
+    /* Style the form as a modal */
+    form {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        padding: 1rem;
+        border: 1px solid #ddd;
+        border-radius: 0.5rem;
+    }
+   /* Place the form in front of the table, in the middle of the page */
+    form {
+        position: fixed;
+        top: 30%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background-color: white;
+        z-index: 100;
+    }
+
+    th,
+    td {
         border: 1px solid #ddd;
         padding: 0.5rem;
     }

@@ -28,6 +28,11 @@ export const actions = {
             });
             console.log(res.status);
 
+            return {
+                success: true,
+                institution // Allows us to use some of the form answers in the success message
+            };
+
         } catch (error) {
             console.error('Error posting institution:', error);
         }
