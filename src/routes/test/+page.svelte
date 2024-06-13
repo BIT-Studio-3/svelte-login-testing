@@ -6,17 +6,15 @@
     const institutions = data.institutions.data;
 
     let showForm = false;
+    if (form?.success) {
+        showForm = false;
+    }
 </script>
 
 <h1>Test</h1>
 
 <!-- A button to show or hide the form -->
 <button on:click={() => (showForm = !showForm)}>Add New Institution</button>
-
-<!-- If the form submit is a success, hide the form -->
-{#if form?.success}
-    {showForm = false}
-{/if}
 
 <!-- A form to accept institution name, region and country -->
 {#if showForm}
