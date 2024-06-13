@@ -1,4 +1,6 @@
 <script>
+    /* A table showing all the records with the option to add a new record */
+    
     export let data;
     const institutions = data.institutions.data;
 </script>
@@ -7,7 +9,7 @@
 
 <!-- A form to accept institution name, region and country -->
 <form method="POST">
-    <label for="institution">Institution Name: </label>
+    <label for="name">Institution Name: </label>
     <input type="text" id="name" name="name" required>
 
     <label for="region">Region: </label>
@@ -42,6 +44,12 @@
 <style>
     form {
         margin-bottom: 1rem;
+    }
+    form > input {
+        margin-right: 0.8rem;
+    }
+    form > *:last-child {
+        margin-right: 0;
     }
 
     table {
