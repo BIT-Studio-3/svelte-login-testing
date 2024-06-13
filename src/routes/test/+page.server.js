@@ -1,4 +1,4 @@
-const baseUrl = "http://localhost:3000";
+const baseUrl = "https://web1-pr-1.onrender.com";
 
 // Use SvelteKit load function to fetch list of institutions from API
 export async function load({ fetch }) {
