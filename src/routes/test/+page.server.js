@@ -12,9 +12,9 @@ export async function load({ fetch }) {
     };
 };
 
-// Use SveleKit form actions to submit a new institution to the API
+// Use SveleKit form actions to CRUD institution records
 export const actions = {
-	default: async ({ request }) => {
+	create: async ({ request }) => {
         try {
             const data = await request.formData();
             const institution = Object.fromEntries(data.entries());
@@ -35,6 +35,24 @@ export const actions = {
 
         } catch (error) {
             console.error('Error posting institution:', error);
+        }
+    },
+    delete: async ({ request }) => {
+        try {
+            const data = await request.formData();
+            const institution = Object.fromEntries(data.entries());
+            
+            const res = await fetch(`${baseUrl}/institutions/${institution.id}`, {
+                method: 'DELETE',
+            });
+            console.log(res.status);
+
+            return {
+                success: true
+            };
+
+        } catch (error) {
+            console.error('Error deleting institution:', error);
         }
     }
 };
