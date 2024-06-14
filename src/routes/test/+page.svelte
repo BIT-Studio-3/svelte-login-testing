@@ -24,7 +24,7 @@
     }
 </script>
 
-<h1>Test</h1>
+<h1>CRUD Demonstration</h1>
 
 <!-- A button to show or hide the form -->
 <button on:click={() => (showForm = !showForm)}>Add New Institution</button>
@@ -32,14 +32,15 @@
 <!-- A form to accept institution name, region and country -->
 {#if showForm}
     <form method="POST" action="?/create" class="modal">
-        <label for="name">Institution Name: </label>
-        <input type="text" id="name" name="name" required />
+        <h2>Add new institution</h2>
+        <label for="name">Institution Name: 
+        <input type="text" id="name" name="name" required /></label>
 
-        <label for="region">Region: </label>
-        <input type="text" id="region" name="region" required />
+        <label for="region">Region: 
+        <input type="text" id="region" name="region" required /></label>
 
-        <label for="country">Country: </label>
-        <input type="text" id="country" name="country" required />
+        <label for="country">Country: 
+        <input type="text" id="country" name="country" required /></label>
 
         <button type="submit">Submit</button>
     </form>
@@ -96,6 +97,7 @@
     /* Style the form as a modal */
     .modal {
         display: flex;
+        flex-direction: column;
         flex-wrap: wrap;
         gap: 0.5rem;
         padding: 1rem;
@@ -109,16 +111,21 @@
         z-index: 100;
         margin-bottom: 1rem;
     }
-    .modal > input {
-        margin-right: 0.8rem;
+    .modal > label {
+        display: flex;
+        justify-content: space-between;
     }
-    .modal > *:last-child {
-        margin-right: 0;
+    .modal input {
+        margin-left: 1em;
+    }
+    .modal h2 {
+        margin: 0;
     }
 
     table {
         width: 100%;
         border-collapse: collapse;
+        margin-top: 1em;
     }
 
     th,
