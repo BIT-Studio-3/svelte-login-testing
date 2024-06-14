@@ -1,6 +1,7 @@
 /* Demonstration of how to list all records, add a new record and reload the list */
 
-const baseUrl = "https://web1-pr-1.onrender.com";
+// const baseUrl = "https://web1-pr-1.onrender.com";
+const baseUrl = "http://localhost:3000";
 
 // Use SvelteKit load function to fetch list of institutions from API
 export async function load({ fetch }) {
@@ -53,6 +54,33 @@ export const actions = {
 
         } catch (error) {
             console.error('Error deleting institution:', error);
+        }
+    },
+    update: async ({ request }) => {
+        try {
+            const data = await request.formData();
+            const institution = Object.fromEntries(data.entries());
+
+            // Create a copy of the institution object without the id property
+            const { id, ...institutionWithoutId } = institution;
+
+            const res = await fetch(`${baseUrl}/institutions/${institution.id}`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(institutionWithoutId),
+                    });
+            const resJson = await res.json();
+            console.log(resJson);
+
+            return {
+                success: true,
+                institution
+            };
+
+        } catch (error) {
+            console.error('Error updating institution:', error);
         }
     }
 };

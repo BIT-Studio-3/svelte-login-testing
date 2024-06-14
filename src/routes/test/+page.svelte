@@ -9,6 +9,19 @@
     if (form?.success) {
         showForm = false;
     }
+
+    // Edit functionality
+    let currentlyEditing = "";
+    let editableName = "";
+    let editableRegion = "";
+    let editableCountry = "";
+
+    function edit(id, name, region, country) {
+        currentlyEditing = id;
+        editableName = name;
+        editableRegion = region;
+        editableCountry = country;
+    }
 </script>
 
 <h1>Test</h1>
@@ -39,18 +52,38 @@
             <th>Institution</th>
             <th>Region</th>
             <th>Country</th>
+            <th>Edit</th>
             <th>Delete</th>
         </tr>
     </thead>
     <tbody>
         {#each institutions as { id, name, region, country }}
             <tr>
-                <td>{name}</td>
-                <td>{region}</td>
-                <td>{country}</td>
+                {#if currentlyEditing === id}
+                <td colspan="4" class="cellrow">
+                    <form method="POST" action="?/update">
+                        <input type="hidden" name="id" value={id} />
+                        <td><input bind:value={editableName} name="name"/></td>
+                        <td><input bind:value={editableRegion} name="region"/></td>
+                        <td><input bind:value={editableCountry} name="country"/></td>
+                        <td>
+                            <button type="submit" on:click={currentlyEditing=""}>Save</button>
+                        </td>
+                    </form>
+                </td>
+                {:else}
+                    <td>{name}</td>
+                    <td>{region}</td>
+                    <td>{country}</td>
+                    <td>
+                        <button on:click={() => edit(id, name, region, country)}>
+                            Edit
+                        </button>
+                    </td>
+                {/if}
                 <td>
                     <form method="POST" action="?/delete">
-                        <input type="hidden" name="id" value="{id}" />
+                        <input type="hidden" name="id" value={id} />
                         <button type="submit">X</button>
                     </form>
                 </td>
@@ -97,4 +130,14 @@
     th {
         background-color: #f2f2f2;
     }
+    .cellrow form {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        align-items: center;
+    }
+    .cellrow {
+        padding: 0;
+        border: none;
+    }
+    
 </style>
