@@ -9,15 +9,15 @@
 
 
 <form method="POST" action="?/login">
-    <h2>Log in</h2>
+    <h2>Log in or register</h2>
     <label for="email">Email: </label>
     <input type="email" id="email" name="email" required />
 
     <label for="password">Password: </label>
     <input type="password" id="password" name="password" required />
 
-    <button type="submit">Submit</button>
-    <p>Don't have an account? <a href="/register">Register</a></p>
+    <button type="submit">Log in</button>
+    <button formaction="?/register">Register</button>
 </form>
 
 
@@ -48,15 +48,19 @@
     button {
         padding: 0.5rem;
         font-size: 1rem;
-        background-color: #333;
+        background-color: #555;
         color: white;
         border: none;
         cursor: pointer;
         margin-top: 1em;
     }
 
+    button[type="submit"] {
+        background-color: #007bff;
+    }
+
     button:hover {
-        background-color: #555;
+        background-color: #777;
     }
 
     a {
