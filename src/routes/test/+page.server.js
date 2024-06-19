@@ -1,7 +1,7 @@
 /* Demonstration of how to list all records, add a new record and reload the list */
 
-// const baseUrl = "https://web1-pr-1.onrender.com";
-const baseUrl = "http://localhost:3000";
+const baseUrl = "https://web1-pr-1.onrender.com";
+// const baseUrl = "http://localhost:3000";
 
 // Use SvelteKit load function to fetch list of institutions from API
 export async function load({ fetch }) {
