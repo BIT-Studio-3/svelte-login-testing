@@ -32,5 +32,9 @@ export const actions = {
         });
 
 		throw redirect(303, '/test'); // Send the user to the app once logged in
-	}
+	},
+    logout: async ({ cookies }) => {
+        cookies.delete('token', { path: '/' });
+        throw redirect(303, '/');
+    },
 };
