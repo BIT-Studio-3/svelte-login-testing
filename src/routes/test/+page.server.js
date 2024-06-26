@@ -11,6 +11,7 @@ export async function load({ fetch, cookies }) {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json',
+                // Need to be logged in to access this route
                 'Authorization': `Bearer ${token}`
             }
         }
