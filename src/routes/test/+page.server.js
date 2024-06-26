@@ -6,7 +6,7 @@ const baseUrl = "http://localhost:3000";
 // Use SvelteKit load function to fetch list of institutions from API
 export async function load({ fetch, cookies }) {
     let token = cookies.get('token');
-    const res = await fetch(`${baseUrl}/institutions`, 
+    const res = await fetch(`${baseUrl}/institutions`,
         {
             method: 'GET',
             headers: {
@@ -24,15 +24,15 @@ export async function load({ fetch, cookies }) {
 
 // Use SveleKit form actions to CRUD institution records
 export const actions = {
-	create: async ({ request }) => {
+    create: async ({ request, cookies }) => {
         try {
             const data = await request.formData();
             const institution = Object.fromEntries(data.entries());
-            
             const res = await fetch(`${baseUrl}/institutions`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${cookies.get('token')}`
                 },
                 body: JSON.stringify(institution),
             });
@@ -47,13 +47,17 @@ export const actions = {
             console.error('Error posting institution:', error);
         }
     },
-    delete: async ({ request }) => {
+    delete: async ({ request, cookies }) => {
         try {
             const data = await request.formData();
             const institution = Object.fromEntries(data.entries());
-            
+
             const res = await fetch(`${baseUrl}/institutions/${institution.id}`, {
                 method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization': `Bearer ${cookies.get('token')}`
+                },
             });
             console.log(res.status);
 
@@ -65,7 +69,7 @@ export const actions = {
             console.error('Error deleting institution:', error);
         }
     },
-    update: async ({ request }) => {
+    update: async ({ request, cookies }) => {
         try {
             const data = await request.formData();
             const institution = Object.fromEntries(data.entries());
@@ -77,9 +81,10 @@ export const actions = {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify(institutionWithoutId),
-                    });
+                    'Authorization': `Bearer ${cookies.get('token')}`
+                },
+                body: JSON.stringify(institutionWithoutId),
+            });
             const resJson = await res.json();
             console.log(resJson);
 
