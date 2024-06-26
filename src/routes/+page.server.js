@@ -37,4 +37,27 @@ export const actions = {
         cookies.delete('token', { path: '/' });
         throw redirect(303, '/');
     },
+    register: async ({ request, cookies }) => {
+        const data = await request.formData();
+        const name = data.get('name');
+        const email = data.get('email');
+        const password = data.get('password');
+
+        // Register the user via the API
+        const res = await fetch(`${baseUrl}/auth/register`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ name, email, password }),
+        });
+        // If the response is html, the registration failed
+        if (res.headers.get('content-type').includes('text/html')) {
+            return {
+                status: 401,
+                error: 'Registration failed'
+            };
+        }
+        throw redirect(303, '/'); // Send the user to the login once registered
+    }
 };
