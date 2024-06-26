@@ -1,8 +1,10 @@
 <script>
-
+    // The register page
 </script>
 
 <!-- TODO make this form a component and reuse for login form -->
+<!-- The action attribute points to the root page server file (routes/+page.server.js), where there's a named register action
+     https://kit.svelte.dev/docs/form-actions#named-actions -->
 <form method="POST" action="/?/register">
     <h2>Register</h2>
     <label for="name">Name: </label>
@@ -15,6 +17,8 @@
     <input type="password" id="password" name="password" required />
 
     <button type="submit">Submit</button>
+    
+    <!-- My login form is on the home page -->
     <p>Already have an account? <a href="/">Log in</a></p>
 </form>
 

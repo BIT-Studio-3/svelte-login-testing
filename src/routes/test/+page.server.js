@@ -1,9 +1,9 @@
-/* Demonstration of how to list all records, add a new record and reload the list */
+/* Demonstration of CRUD for Institutions */
 
 // const baseUrl = "https://web1-pr-1.onrender.com";
 const baseUrl = "http://localhost:3000";
 
-// Use SvelteKit load function to fetch list of institutions from API
+// Use SvelteKit load function to fetch list of institutions from API on page load
 export async function load({ fetch, cookies }) {
     let token = cookies.get('token');
     const res = await fetch(`${baseUrl}/institutions`,
@@ -17,6 +17,7 @@ export async function load({ fetch, cookies }) {
     );
     const institutions = await res.json();
 
+    // Send the data to the page as props (`export let data` in the page component)
     return {
         institutions
     };
@@ -26,12 +27,14 @@ export async function load({ fetch, cookies }) {
 export const actions = {
     create: async ({ request, cookies }) => {
         try {
+            // Parse the form data
             const data = await request.formData();
             const institution = Object.fromEntries(data.entries());
             const res = await fetch(`${baseUrl}/institutions`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
+                    // Need to be logged in
                     'Authorization': `Bearer ${cookies.get('token')}`
                 },
                 body: JSON.stringify(institution),

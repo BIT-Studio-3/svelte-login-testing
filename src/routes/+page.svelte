@@ -1,13 +1,11 @@
 <script>
-
+    // Client-side JavaScript here
 </script>
 
 <h1>Welcome to SvelteKit</h1>
 <p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
 
 <!-- A log in form with the option to register instead -->
-
-
 <form method="POST" action="?/login">
     <h2>Log in</h2>
     <label for="email">Email: </label>

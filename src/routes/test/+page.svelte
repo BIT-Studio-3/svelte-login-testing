@@ -1,5 +1,9 @@
 <script>
-    /* A table showing all the records with the option to add a new record */
+    /* 
+        This file contains the main functionality of the app: managing instutution records.
+        It's a protected route so the user has to be logged in to access it.
+        TODO: add a fallback with a message if the user is not logged in 
+    */
 
     export let data;
     export let form;
@@ -74,6 +78,7 @@
                     </form>
                 </td>
                 {:else}
+                <!-- Display the row normally when not in edit mode -->
                     <td>{name}</td>
                     <td>{region}</td>
                     <td>{country}</td>
@@ -84,6 +89,7 @@
                     </td>
                 {/if}
                 <td>
+                    <!-- Just one button to delete a given row -->
                     <form method="POST" action="?/delete">
                         <input type="hidden" name="id" value={id} />
                         <button type="submit">X</button>

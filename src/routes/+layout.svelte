@@ -1,5 +1,5 @@
 <script>
-   
+   // This is the main layout file
 </script>
 
 <!-- TODO remove the log out button if not logged in -->
