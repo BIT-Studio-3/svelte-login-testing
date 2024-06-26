@@ -62,6 +62,7 @@
             <tr>
                 {#if currentlyEditing === id}
                 <td colspan="4" class="cellrow">
+                    <!-- TODO fix the layout of the row while editing -->
                     <form method="POST" action="?/update">
                         <input type="hidden" name="id" value={id} />
                         <td><input bind:value={editableName} name="name"/></td>
